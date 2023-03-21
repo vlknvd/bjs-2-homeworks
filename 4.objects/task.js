@@ -10,14 +10,14 @@ Student.prototype.setSubject = function (subjectName) {
 }
 
 Student.prototype.addMarks = function (...marksToAdd) {
-  // if (Student.hasOwnProperty('marks')) {
-  //   this.marks.push(...marksToAdd);
-  // }
+  if(this.marks === undefined) {
+    return;
+  }
   this.marks.push(...marksToAdd);
 }  
 
 Student.prototype.getAverage = function () {
-  if (this.marks.length === 0) {
+  if (this.marks === undefined || this.marks.length === 0) {
     return 0;
   }
   let sum = 0;
@@ -28,7 +28,11 @@ Student.prototype.getAverage = function () {
 }
 
 Student.prototype.exclude = function (reason) {
-  delete Student.subject;
-  delete Student.marks;
+  delete this.subject;
+  delete this.marks;
   this.excluded = reason;
 }
+
+
+
+

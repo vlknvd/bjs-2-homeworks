@@ -68,14 +68,26 @@ class Library {
         this.books = [];
     }
 
-    addBook(book) {
-        book = {PrintEditionItem};
+    addBook(PrintEditionItem) {
         if (PrintEditionItem.state > 30) {
-            this.books.push();
+            this.books.push(PrintEditionItem);
         }
     }
 
     findBookBy(type, value) {
-        console.log(type,value);
+        type = PrintEditionItem;
+        if (type === value) {
+            return PrintEditionItem;
+        } else {
+            return null;
+        }
+    }
+
+    giveBookByName(bookName){
+        if (bookName === Book) {
+            return this.books.splice(Book);
+        } else {
+            return null;
+        }
     }
 }

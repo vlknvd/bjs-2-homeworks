@@ -75,19 +75,55 @@ class Library {
     }
 
     findBookBy(type, value) {
-        type = PrintEditionItem;
-        if (type === value) {
-            return PrintEditionItem;
-        } else {
-            return null;
+        let book = null;
+        for (let i = 0; i < this.books.length; i++) {
+            if(this.books[i][type] === value) {
+                book = this.books[i];
+            }
         }
+        return book;
     }
 
     giveBookByName(bookName){
-        if (bookName === Book) {
-            return this.books.splice(Book);
+        for (let i = 0; i < this.books.length; i++) {
+            if (this.books[i].name === bookName) {
+                return this.books.splice(i, 1)[0];
+            }             
+        }
+        return null;
+    }    
+}
+
+class Student {
+    constructor(userName) {
+        this.userName = userName;
+        this.marks = {};
+    }
+    addMark(mark, subjectName) {
+        if (mark < 2 && mark > 5) {
+            return
+        }
+        if (this.marks[subjectName] === undefined) {
+            this.marks[subjectName] = [];
+            this.marks[subjectName].push(mark);
         } else {
-            return null;
+            this.marks[subjectName].push(mark);
         }
     }
-}
+    getAverageBySubject(subjectName) {
+        if (this.marks[subjectName] === undefined) {
+            return;
+        } else {
+            let sum = this.marks[subjectName].reduce((mark, nextMark) => mark + nextMark);
+            return sum / this.marks[subjectName].length;
+        }
+    }
+    getAverage() {
+        let averageMark = 0;
+        let subject = Object.keys(this.marks);
+        for (let i = 0; i < subject.length; i++) {
+            averageMark += this.getAverageBySubject(subject[i]);
+        }
+        return averageMark / subject.length;
+    }
+}    
